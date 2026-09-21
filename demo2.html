@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Web Truy Kích Style</title>
+    <!-- Font chữ phong cách Game / Esport -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #090c10 url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600') no-repeat center center fixed;
+            background-size: cover;
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px 10px;
+            position: relative;
+        }
+
+        /* Lớp phủ nền làm tối chuẩn Esport */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 14, 23, 0.85);
+            background: radial-gradient(circle, rgba(15,23,42,0.7) 0%, rgba(5,8,15,0.95) 100%);
+            z-index: -1;
+        }
+
+        .main-wrapper {
+            max-width: 950px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ===== KHUNG ĐĂNG NHẬP / ĐĂNG KÝ PHONG CÁCH TRUY KÍCH ===== */
+        .auth-card {
+            background: rgba(15, 23, 42, 0.92);
+            max-width: 440px;
+            margin: 40px auto;
+            border: 2px solid #eab308;
+            border-radius: 4px;
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.35), inset 0 0 15px rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            position: relative;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .tab-header {
+            display: flex;
+            background: #0f172a;
+            border-bottom: 2px solid #eab308;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: #94a3b8;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #000;
+            background: #eab308;
+            text-shadow: 0 0 2px rgba(255,255,255,0.8);
+            box-shadow: inset 0 -4px 0 #ca8a04;
+        }
+
+        .form-content {
+            padding: 30px 25px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .form-title h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 32px;
+            color: #facc15;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+        }
+
+        .form-title p {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #475569;
+            color: #ffffff;
+            border-radius: 2px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #facc15;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+        }
+
+        .options-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .options-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-family: 'Teko', sans-serif;
+            font-size: 22px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #facc15, #eab308);
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.6);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #475569;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background: #64748b;
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .switch-link a {
+            color: #facc15;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ===== KHUNG GIAO DIỆN TRÌNH DUYỆT WEB ===== */
+        .browser-card {
+            display: none;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            margin: 20px auto;
+            width: 100%;
+            color: #334155;
+        }
+
+        .browser-bar {
+            background: #1e293b;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #22c55e; }
+
+        .url-bar {
+            flex: 1;
+            background: #0f172a;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #38bdf8;
+            border: 1px solid #334155;
+            transition: all 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-info {
+            font-size: 13px;
+            font-weight: bold;
+            color: #facc15;
+        }
+
+        .btn-logout {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+        }
+
+        .web-header {
+            background: #0f172a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 3px solid #eab308;
+        }
+
+        .web-header h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            letter-spacing: 1px;
+            color: #facc15;
+        }
+
+        .web-nav {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .web-nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .web-nav a:hover, .web-nav a.active {
+            background: #eab308;
+            color: #000;
+        }
+
+        .web-body {
+            padding: 20px;
+            background: #f8fafc;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .news-item {
+            background: white;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .news-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: #eab308;
+        }
+
+        .news-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .news-item p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* Khung hiển thị chi tiết bài viết nội bộ */
+        .article-detail {
+            display: none;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-back {
+            background: #e2e8f0;
+            color: #334155;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .btn-back:hover {
+            background: #cbd5e1;
+        }
+
+        /* Frame nhúng trực tiếp trang web ngoài vào giao diện */
+        .embed-container {
+            display: none;
+            width: 100%;
+            height: 550px;
+            border: none;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- FORM XÁC THỰC - PHONG CÁCH TRUY KÍCH -->
+        <div class="auth-card" id="authBox">
+            <div class="tab-header">
+                <button class="tab-btn active" id="loginTabBtn" onclick="openTab('login')">ĐĂNG NHẬP</button>
+                <button class="tab-btn" id="regTabBtn" onclick="openTab('register')">ĐĂNG KÝ</button>
+            </div>
+
+            <div class="form-content">
+                <!-- FORM ĐĂNG NHẬP -->
+                <form id="loginForm" class="form-section active">
+                    <div class="form-title">
+                        <h2>XÁC THỰC TÀI KHOẢN</h2>
+                        <p>Đăng nhập hệ thống điều hành</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tên đăng nhập (*)</label>
+                        <input type="text" id="loginUser" placeholder="Nhập tên tài khoản..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mật khẩu (*)</label>
+                        <input type="password" id="loginPass" placeholder="Nhập mật khẩu..." required>
+                    </div>
+
+                    <div class="options-group" style="margin-bottom: 18px;">
+                        <label><input type="checkbox"> Ghi nhớ mật khẩu</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">ĐĂNG NHẬP NGAY</button>
+
+                    <div class="switch-link">
+                        Chưa có tài khoản? <a href="javascript:void(0)" onclick="openTab('register')">Đăng ký tài khoản</a>
+                    </div>
+                </form>
+
+                <!-- FORM ĐĂNG KÝ -->
+                <form id="registerForm" class="form-section">
+                    <div class="form-title">
+                        <h2>TẠO TÀI KHOẢN MỚI</h2>
+                        <p>Tham gia hệ thống ngay</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" id="fullname" placeholder="Nhập họ và tên...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tên đăng nhập (*)</label>
+                        <input type="text" id="regUser" placeholder="Tạo tên tài khoản..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mật khẩu (*)</label>
+                        <input type="password" id="regPass" placeholder="Tạo mật khẩu..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu (*)</label>
+                        <input type="password" id="confirmPass" placeholder="Nhập lại mật khẩu..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <div class="options-group">
+                            <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
+                            <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quốc tịch</label>
+                        <select id="country">
+                            <option value="Việt Nam" selected>Việt Nam</option>
+                            <option value="United States">United States</option>
+                            <option value="Japan">Japan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sở thích</label>
+                        <div class="options-group">
+                            <label><input type="checkbox"> Thể thao</label>
+                            <label><input type="checkbox" checked> Chơi Game</label>
+                            <label><input type="checkbox"> Công nghệ</label>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">XÁC NHẬN</button>
+                        <button type="reset" class="btn btn-secondary">LÀM LẠI</button>
+                    </div>
+
+                    <div class="switch-link">
+                        Đã có tài khoản? <a href="javascript:void(0)" onclick="openTab('login')">Quay lại Đăng nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- GIAO DIỆN TRÌNH DUYỆT WEB -->
+        <div class="browser-card" id="browserBox">
+            <div class="browser-bar">
+                <div class="browser-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                </div>
+                <div class="url-bar" id="browserUrl">🔒 https://mywebsite.com/home</div>
+                <span class="user-info" id="userTitle">Xin chào!</span>
+                <button class="btn-logout" onclick="logout()">Đăng xuất</button>
+            </div>
+
+            <header class="web-header">
+                <h1>TRANG TIN TỨC TỔNG HỢP</h1>
+                <ul class="web-nav">
+                    <li><a href="javascript:void(0)" onclick="showHome()">Trang chủ</a></li>
+                    <li><a href="javascript:void(0)" onclick="openEmbedPage('https://vtv.vn/thoi-su.htm')">Thời sự</a></li>
+                    <li><a href="javascript:void(0)" onclick="openEmbedPage('https://vtv.vn/cong-nghe.htm')">Công nghệ</a></li>
+                </ul>
+            </header>
+
+            <main class="web-body">
+                <!-- 1. Danh sách bài viết Trang chủ -->
+                <div id="newsFeed">
+                    <h2>Bài viết nổi bật</h2>
+                    <div class="news-grid">
+                        <div class="news-item" onclick="openArticle(
+                            'Xu hướng Công nghệ Web năm 2026', 
+                            '21/09/2026', 
+                            'Nguyễn Văn A', 
+                            'Thiết kế giao diện web năm 2026 đang chuyển dịch mạnh mẽ sang sự tối giản, tốc độ tải cực nhanh và trải nghiệm người dùng cao cấp. Các thư viện HTML5/CSS3 hiện đại giúp lập trình viên xây dựng giao diện tương tác mượt mà.')">
+                            <h3>1. Xu hướng Công nghệ Web năm 2026 ➔</h3>
+                            <p>Tìm hiểu các xu hướng thiết kế giao diện HTML5/CSS3 và JavaScript hiện đại...</p>
+                        </div>
+
+                        <div class="news-item" onclick="openArticle(
+                            'Hướng dẫn Lập trình Frontend cơ bản', 
+                            '20/09/2026', 
+                            'Trần Thị B', 
+                            'Để bắt đầu học Frontend, bạn cần nắm vững bộ ba HTML, CSS và JavaScript. HTML cung cấp khung xương cấu trúc, CSS mang lại vẻ đẹp giao diện, còn JavaScript xử lý logic tính năng.')">
+                            <h3>2. Hướng dẫn Lập trình Frontend cơ bản ➔</h3>
+                            <p>Tạo Form đăng ký, đăng nhập và tích hợp xem bài viết chi tiết đơn giản...</p>
+                        </div>
+
+                        <div class="news-item" onclick="openArticle(
+                            'Khám phá sức mạnh của JavaScript DOM', 
+                            '19/09/2026', 
+                            'Lê Văn C', 
+                            'DOM (Document Object Model) cho phép JavaScript thao tác trực tiếp với HTML/CSS. Nhờ DOM, trang web có thể thay đổi nội dung động, ẩn/hiện các khung mà không cần phải tải lại toàn bộ trang web.')">
+                            <h3>3. Sức mạnh của JavaScript DOM ➔</h3>
+                            <p>Giải thích cách thao tác với các phần tử HTML để thay đổi giao diện linh hoạt...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Khung hiển thị chi tiết nội dung bài viết nội bộ -->
+                <div id="articleDetail" class="article-detail">
+                    <button class="btn-back" onclick="showHome()">← Quay lại danh sách tin</button>
+                    <h1 id="articleTitle" style="color: #0f172a; margin-bottom: 8px; font-size: 22px;"></h1>
+                    <div style="font-size: 13px; color: #64748b; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
+                        Đăng ngày: <span id="articleDate"></span> | Tác giả: <strong id="articleAuthor"></strong>
+                    </div>
+                    <div id="articleBody" style="line-height: 1.6; color: #334155; font-size: 14px;"></div>
+                </div>
+
+                <!-- 3. Khung iframe nhúng trực tiếp website VTV vào trong web -->
+                <div id="embedBox" class="embed-container">
+                    <iframe id="webIframe" src="" title="External Web View"></iframe>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('registerForm').classList.remove('active');
+            document.getElementById('loginTabBtn').classList.remove('active');
+            document.getElementById('regTabBtn').classList.remove('active');
+
+            if (tabName === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('loginTabBtn').classList.add('active');
+            } else {
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('regTabBtn').classList.add('active');
+            }
+        }
+
+        // Đăng ký
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('regUser').value.trim();
+            const p = document.getElementById('regPass').value;
+            const confirmP = document.getElementById('confirmPass').value;
+            const name = document.getElementById('fullname').value.trim() || u;
+
+            if (p !== confirmP) {
+                alert('Mật khẩu nhập lại không khớp! Vui lòng kiểm tra lại.');
+                return;
+            }
+
+            if (u && p) {
+                localStorage.setItem('user', u);
+                localStorage.setItem('pass', p);
+                localStorage.setItem('name', name);
+                alert('Đăng ký thành công! Vui lòng đăng nhập.');
+                document.getElementById('loginUser').value = u;
+                openTab('login');
+            }
+        });
+
+        // Đăng nhập
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('loginUser').value.trim();
+            const p = document.getElementById('loginPass').value;
+
+            const savedU = localStorage.getItem('user');
+            const savedP = localStorage.getItem('pass');
+            const savedName = localStorage.getItem('name') || u;
+
+            if (!savedU) {
+                alert('Chưa có tài khoản! Vui lòng Đăng ký trước.');
+                openTab('register');
+            } else if (u === savedU && p === savedP) {
+                alert('Đăng nhập thành công!');
+                document.getElementById('authBox').style.display = 'none';
+                document.getElementById('browserBox').style.display = 'block';
+                document.getElementById('userTitle').innerText = 'Xin chào, ' + savedName;
+                showHome();
+            } else {
+                alert('Sai tên đăng nhập hoặc mật khẩu!');
+            }
+        });
+
+        // Đăng xuất
+        function logout() {
+            showHome();
+            document.getElementById('browserBox').style.display = 'none';
+            document.getElementById('authBox').style.display = 'block';
+            document.getElementById('loginPass').value = '';
+        }
+
+        // Hiển thị trang chủ tin tức nội bộ
+        function showHome() {
+            document.getElementById('newsFeed').style.display = 'block';
+            document.getElementById('articleDetail').style.display = 'none';
+            document.getElementById('embedBox').style.display = 'none';
+
+            document.getElementById('browserUrl').innerText = '🔒 https://mywebsite.com/home';
+        }
+
+        // Mở xem chi tiết bài viết nội bộ
+        function openArticle(title, date, author, body) {
+            document.getElementById('newsFeed').style.display = 'none';
+            document.getElementById('embedBox').style.display = 'none';
+            document.getElementById('articleDetail').style.display = 'block';
+
+            document.getElementById('articleTitle').innerText = title;
+            document.getElementById('articleDate').innerText = date;
+            document.getElementById('articleAuthor').innerText = author;
+            document.getElementById('articleBody').innerText = body;
+
+            document.getElementById('browserUrl').innerText = '🔒 https://mywebsite.com/article?title=' + encodeURIComponent(title);
+        }
+
+        // Tải trực tiếp trang web bên ngoài vào khung iframe trong web
+        function openEmbedPage(url) {
+            document.getElementById('newsFeed').style.display = 'none';
+            document.getElementById('articleDetail').style.display = 'none';
+            
+            const embedBox = document.getElementById('embedBox');
+            const iframe = document.getElementById('webIframe');
+            
+            iframe.src = url;
+            embedBox.style.display = 'block';
+
+            // Cập nhật thanh địa chỉ URL giả lập
+            document.getElementById('browserUrl').innerText = '🔒 ' + url;
+        }
+    </script>
+</body>
+</html>
